@@ -3,10 +3,10 @@
 	$db = pg_connect($conn_string) or die("Connection to database failed!");
 
 	$raw_post = hexToStr($_GET["data"]);
-	$lines = explode('\n', $raw_post);
+	/*$lines = explode('\n', $raw_post);
 	foreach($lines as $json_line) {
 		$line = json_decode($json_line);
-	}
+	}*/
 
 
 	function hexToStr($hex){
