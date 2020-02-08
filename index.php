@@ -11,6 +11,7 @@
 	$lines = explode('\n', $raw_post);
 	foreach($lines as $json_line) {
 		$line = json_decode($json_line);
+		echo $line["foo"];
 	}
 	echo "test";
 
