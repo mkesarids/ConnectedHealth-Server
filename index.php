@@ -5,7 +5,8 @@
 	$myPDO = new PDO($conn_string, $user, $password);
 
 	$raw_post = hexToStr($_GET['data']);
-	echo "raw: " + $raw_post + "\n";
+	echo "raw: ";
+	echo $raw_post + "\n";
 	$json_data = json_decode($raw_post, TRUE);
 	//$lines = explode('\n', $raw_post);
 	foreach($json_data['data'] as $line) {
