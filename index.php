@@ -21,8 +21,15 @@
 	$raw_post = hexToStr($_GET['data']);
 	$json_data = json_decode($raw_post, TRUE);
 	foreach($json_data['data'] as $line) {
-		$data = array('accel_x' => $line['accel_x'],'accel_y' => $line['accel_y'],'accel_z' => $line['accel_z'],'quat_x' => $line['quat_x'],'quat_y' => $line['quat_y'],'quat_z' => $line['quat_z'],'quat_w' => $line['quat_w']);
-		$insert->execute($data);
+		$insert->bindParam(':accel_x',$line['accel_x']);
+		$insert->bindParam(':accel_y',$line['accel_y']);
+		$insert->bindParam(':accel_z',$line['accel_z']);
+		$insert->bindParam(':quat_x',$line['quat_x']);
+		$insert->bindParam(':quat_y',$line['quat_y']);
+		$insert->bindParam(':quat_z',$line['quat_z']);
+		$insert->bindParam(':quat_w',$line['quat_w']);
+
+		$insert->execute();
 	}
 
 	echo "Success!";
