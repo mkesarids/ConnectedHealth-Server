@@ -19,7 +19,9 @@
 
 	$result = $myPDO->query('SELECT * FROM sensors')->fetchAll();
 	foreach($result as $line) {
-		echo $line;
+		foreach($line as $item) {
+			echo $item;
+		}
 	}
 
 
