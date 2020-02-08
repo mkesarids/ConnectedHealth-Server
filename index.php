@@ -7,11 +7,11 @@
 	$password = "40fe9b6dc6a9b090eb05c5b17b5a9e0be4896301ce9b8a52b169e710db66a758";
 	$myPDO = new PDO($conn_string, $user, $password);
 
-	/*$raw_post = hexToStr($_GET["data"]);
+	$raw_post = hexToStr($_GET["data"]);
 	$lines = explode('\n', $raw_post);
 	foreach($lines as $json_line) {
 		$line = json_decode($json_line);
-	}*/
+	}
 	echo "test";
 
 	function hexToStr($hex){
