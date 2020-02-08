@@ -13,7 +13,7 @@
 	$myPDO->query('CREATE TABLE IF NOT EXISTS sensors (accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real)');
 
 	// Prepare insertion statement
-	$insert_string = 'INSERT INTO sensors (accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w) VALUES (?, ?, ?, ?, ?, ?, ?)';
+	$insert_string = 'INSERT INTO sensors (accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w) VALUES (:accel_x, :accel_y, :accel_z, :quat_x, :quat_y, :quat_z, :quat_w)';
 	$insert = $myPDO->prepare($insert_string);
 
 
@@ -21,7 +21,7 @@
 	$raw_post = hexToStr($_GET['data']);
 	$json_data = json_decode($raw_post, TRUE);
 	foreach($json_data['data'] as $line) {
-		$data = array($line['accel_x'],$line['accel_y'],$line['accel_z'],$line['quat_x'],$line['quat_y'],$line['quat_z'],$line['quat_w']);
+		$data = array('accel_' => $line['accel_x'],'accel_y' => $line['accel_y'],'accel_z' => $line['accel_z'],'quat_x' => $line['quat_x'],'quat_y' => $line['quat_y'],'quat_z' => $line['quat_z'],'quat_w' => $line['quat_w']);
 		$insert->execute($data);
 	}
 
