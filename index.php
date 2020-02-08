@@ -5,13 +5,14 @@
 	$myPDO = new PDO($conn_string, $user, $password);
 
 	$raw_post = hexToStr($_GET['data']);
+	echo "raw: " + $raw_post + "\n";
 	$json_data = json_decode($raw_post, TRUE);
 	//$lines = explode('\n', $raw_post);
 	foreach($json_data['data'] as $line) {
 		//$line = json_decode($json_line, TRUE);
 		echo $line['foo'];
 	}
-	echo "test";
+	echo "\n\ntest";
 
 	function hexToStr($hex){
 		$string='';
