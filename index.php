@@ -18,7 +18,9 @@
 	}
 
 	$result = $myPDO->query('SELECT * FROM sensors')->fetchAll();
-	echo $result;
+	foreach($result as $line) {
+		echo $line;
+	}
 
 
 	function hexToStr($hex){
