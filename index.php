@@ -10,7 +10,7 @@
 	$raw_post = hexToStr($_GET["data"]);
 	$lines = explode('\n', $raw_post);
 	foreach($lines as $json_line) {
-		$line = json_decode($json_line);
+		$line = json_decode($json_line, TRUE);
 		echo $line["foo"];
 	}
 	echo "test";
