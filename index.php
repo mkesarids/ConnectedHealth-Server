@@ -17,13 +17,7 @@
 		$insert->execute($data);
 	}
 
-	$result = $myPDO->query('SELECT * FROM sensors')->fetchAll();
-	foreach($result as $line) {
-		foreach($line as $item) {
-			echo $item;
-		}
-	}
-
+	echo "Success!"
 
 	function hexToStr($hex){
 		$string='';
