@@ -20,7 +20,7 @@
 		$insert->execute($data);
 	}
 
-	echo "Success!"
+	echo "Success!";
 
 	function hexToStr($hex){
 		$string='';
