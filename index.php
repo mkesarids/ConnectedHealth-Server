@@ -4,17 +4,22 @@
 	$password = "40fe9b6dc6a9b090eb05c5b17b5a9e0be4896301ce9b8a52b169e710db66a758";
 	$myPDO = new PDO($conn_string, $user, $password);
 
+	$myPDO->query('CREATE TABLE IF NOT EXISTS sensors (accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real)');
+
+	$insert_string = 'INSERT INTO sensors (accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w) VALUES (?, ?, ?, ?, ?, ?, ?)';
+	$insert = $myPDO->prepare($insert_string);
+
+
 	$raw_post = hexToStr($_GET['data']);
-	echo "raw: ";
-	echo $raw_post;
-	echo "\n";
 	$json_data = json_decode($raw_post, TRUE);
-	//$lines = explode('\n', $raw_post);
 	foreach($json_data['data'] as $line) {
-		//$line = json_decode($json_line, TRUE);
-		echo $line['foo'];
+		$data = array($line['accel_x'],$line['accel_y'],$line['accel_z'],$line['quat_x'],$line['quat_y'],$line['quat_z'],$line['quat_w']);
+		$insert->execute($data);
 	}
-	echo "\n\ntest";
+
+	$result = $myPDO->query('SELECT * FROM sensors')->fetchAll();
+	echo $result;
+
 
 	function hexToStr($hex){
 		$string='';
