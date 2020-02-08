@@ -1,5 +1,5 @@
 <?php
-	$file = fopen("data.csv", "w") or die("Unable to open file!");
+	$file = fopen("data.csv", "a") or die("Unable to open file!");
 	fwrite($file, "test,test\n");
 	fclose($file);
 
