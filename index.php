@@ -1,12 +1,12 @@
 <?php
 	// Connection details
-	$host = "ec2-52-23-14-156.compute-1.amazonaws.com";
-	$db_name = "d85kjmio5bil9";
+	$host = "ec2-18-235-97-230.compute-1.amazonaws.com";
+	$db_name = "d3j59l1am40bi2";
 	$conn_string = "pgsql:host=".$host.";dbname=".$db_name;
 
 	// Connect
-	$user = "zvlpgcwvbqmith";
-	$password = "0be450dccaf7fd1b604d04d30d9da56bdb3221cbac51997bc1285b7dc5c58dea";
+	$user = "flcdhpgwtajhxu";
+	$password = "486d455e66df445d34924aefad87c58170ff1893a9188bc87042c7d31de519b5";
 
 	try {
 		$myPDO = new PDO($conn_string, $user, $password);
