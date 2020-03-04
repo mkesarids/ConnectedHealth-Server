@@ -14,7 +14,7 @@
 		// Create sensors table
 		$myPDO->exec('CREATE TABLE sensors (record_id text, name text, accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real, workout text)');
 
-		$insert_string = 'INSERT INTO sensors (record_id, user, accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w, workout) VALUES (:record_id, :user, :accel_x, :accel_y, :accel_z, :quat_x, :quat_y, :quat_z, :quat_w, :workout)';
+		$insert_string = 'INSERT INTO sensors (record_id, name, accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w, workout) VALUES (:record_id, :name, :accel_x, :accel_y, :accel_z, :quat_x, :quat_y, :quat_z, :quat_w, :workout)';
 		$insert = $myPDO->prepare($insert_string);
 		
 		// Convert hex->data->json and then execute with prepared statement
