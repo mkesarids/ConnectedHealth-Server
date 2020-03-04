@@ -20,6 +20,7 @@
 		// Convert hex->data->json and then execute with prepared statement
 		$raw_post = hexToStr($_GET['data']);
 		$json_data = json_decode($raw_post, TRUE);
+		echo $json_data . "<br>";
 		foreach($json_data['data'] as $line) {
 			$insert->bindParam(':accel_x',$line['accel_x']);
 			$insert->bindParam(':accel_y',$line['accel_y']);
