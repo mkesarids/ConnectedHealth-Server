@@ -12,7 +12,7 @@
 		$myPDO = new PDO($conn_string, $user, $password);
 
 		// Create sensors table
-		$myPDO->exec('CREATE TABLE sensors (record_id text, name text, accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real, workout text)');
+		$myPDO->exec('CREATE TABLE IF NOT EXIST sensors (record_id text, name text, accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real, workout text)');
 
 		$insert_string = 'INSERT INTO sensors (record_id, name, accel_x, accel_y, accel_z, quat_x, quat_y, quat_z, quat_w, workout) VALUES (:record_id, :name, :accel_x, :accel_y, :accel_z, :quat_x, :quat_y, :quat_z, :quat_w, :workout)';
 		$insert = $myPDO->prepare($insert_string);
@@ -20,8 +20,9 @@
 		// Convert hex->data->json and then execute with prepared statement
 		$raw_post = hexToStr($_GET['data']);
 		$json_data = json_decode($raw_post, TRUE);
-		echo $raw_post . "<br>";
 		foreach($json_data['data'] as $line) {
+			$insert->bindParam(':record_id',$line['record_id']);
+			$insert->bindParam(':name',$line['name']);
 			$insert->bindParam(':accel_x',$line['accel_x']);
 			$insert->bindParam(':accel_y',$line['accel_y']);
 			$insert->bindParam(':accel_z',$line['accel_z']);
@@ -29,6 +30,7 @@
 			$insert->bindParam(':quat_y',$line['quat_y']);
 			$insert->bindParam(':quat_z',$line['quat_z']);
 			$insert->bindParam(':quat_w',$line['quat_w']);
+			$insert->bindParam(':workout',$line['workout']);
 
 			$insert->execute();
 		}
