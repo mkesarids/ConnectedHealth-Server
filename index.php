@@ -12,7 +12,7 @@
 		$myPDO = new PDO($conn_string, $user, $password);
 
 		// Create sensors table
-		$myPDO->exec('CREATE TABLE sensors (accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real)');
+		$myPDO->exec('CREATE TABLE sensors (record_id text, accel_x real, accel_y real, accel_z real, quat_x real, quat_y real, quat_z real, quat_w real, workout text)');
 
 
 		echo "New records created successfully!";
