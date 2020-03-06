@@ -18,8 +18,8 @@
 		if($stmt->execute()) {
 			while($row = $stmt->fetch()){
 				echo "<tr>";
-				foreach($row as $key => $value) {
-					echo "<td>" . $value . "</td>";
+				foreach($i = 0; $i < count($row); $i++) {
+					echo "<td>" . $row[$i] . "</td>";
 				}
 				echo "</tr>";
 			}
