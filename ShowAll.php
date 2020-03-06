@@ -11,7 +11,7 @@
 	try {
 		$pdo = new PDO($conn_string, $user, $password);
 
-		$stmt = $pdo->prepare("SELECT * FROM sensors;");
+		$stmt = $pdo->prepare("SELECT Record_id, Timestamp FROM sensors;");
 
 		echo "<table>";
 
