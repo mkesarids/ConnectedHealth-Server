@@ -18,7 +18,7 @@
 		if($stmt->execute()) {
 			while($row = $stmt->fetch()){
 				echo "<tr>";
-				foreach($row as $value) {
+				foreach($row as $key => $value) {
 					echo "<td>" . $value . "</td>";
 				}
 				echo "</tr>";
