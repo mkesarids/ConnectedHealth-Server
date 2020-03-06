@@ -22,7 +22,7 @@
 			$fields = array('record_id', 'timestamp', 'name', 'accel_x', 'accel_y', 'accel_z', 'quat_x', 'quat_y', 'quat_z', 'quat_w', 'workout');
 			fputcsv($f, $fields, $delimiter);
     
-			while($row = $stmt->fetch()){
+			while($row = $stmt->fetch(PDO::FETCH_NUM)){
 				$lineData = array("a");
 				for($i = 0; $i < count($row); $i++) {
 					array_push($lineData, $row[$i]);
