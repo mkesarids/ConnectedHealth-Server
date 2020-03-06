@@ -17,7 +17,7 @@
 
 		if($stmt->execute()) {
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				echo "<tr><td>" . $row["Record_id"] . "</td><td>" . $row["Timestamp"] . "</td></tr>";
+				echo "<tr><td>" . $row[0] . "</td><td>" . $row["Timestamp"] . "</td></tr>";
 			}
 		}
 
