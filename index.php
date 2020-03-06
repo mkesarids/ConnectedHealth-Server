@@ -18,7 +18,7 @@
 		$insert = $myPDO->prepare($insert_string);
 		
 		// Convert hex->data->json and then execute with prepared statement
-		$raw_post = hexToStr($_GET['data']);
+		$raw_post = file_get_contents('php://input'); // hexToStr($_GET['data']);
 		$json_data = json_decode($raw_post, TRUE);
 		foreach($json_data['data'] as $line) {
 			$insert->bindParam(':record_id',$line['record_id']);
