@@ -17,7 +17,11 @@
 
 		if($stmt->execute()) {
 			while($row = $stmt->fetch()){
-				echo "<tr><td>" . $row[0] . "</td><td>" . $row["Timestamp"] . "</td></tr>";
+				echo "<tr>";
+				foreach($row as $value) {
+					echo "<td>" . $value . "</td>";
+				}
+				echo "</tr>";
 			}
 		}
 
