@@ -14,26 +14,26 @@
 		$stmt = $pdo->prepare("SELECT * FROM sensors;");
 
 		if($stmt->execute()) {
-      $delimiter = ",";
-      $filename = "SensorData_" . date('Y-m-d') . ".csv";
+			$delimiter = ",";
+			$filename = "SensorData_" . date('Y-m-d') . ".csv";
       
-      $f = fopen('php://memory', 'w');
+			$f = fopen('php://memory', 'w');
       
-      $fields = array('record_id', 'timestamp', 'name', 'accel_x', 'accel_y', 'accel_z', 'quat_x', 'quat_y', 'quat_z', 'quat_w', 'workout');
-      fputcsv($f, $fields, $delimiter);
+			$fields = array('record_id', 'timestamp', 'name', 'accel_x', 'accel_y', 'accel_z', 'quat_x', 'quat_y', 'quat_z', 'quat_w', 'workout');
+			fputcsv($f, $fields, $delimiter);
     
 			while($row = $stmt->fetch()){
-        $lineData = array();
+				$lineData = array("a");
 				for($i = 0; $i < count($row); $i++) {
 					array_push($lineData, $row[$i]);
 				}
-        fputcsv($f, $lineData, $delimiter);
+				fputcsv($f, $lineData, $delimiter);
 			}
       
-      header('Content-Type: text/csv');
-      header('Content-Disposition: attachment; filename="' . $filename . '";');
+			header('Content-Type: text/csv');
+			header('Content-Disposition: attachment; filename="' . $filename . '";');
       
-      fpassthru($f);
+			fpassthru($f);
 		}
 
 	} catch (PDOException $e) {
