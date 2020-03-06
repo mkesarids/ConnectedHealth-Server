@@ -9,14 +9,16 @@
 	$password = "486d455e66df445d34924aefad87c58170ff1893a9188bc87042c7d31de519b5";
 
 	try {
-		$myPDO = new PDO($conn_string, $user, $password);
+		$pdo = new PDO($conn_string, $user, $password);
 
-		$result = $myPDO->query("SELECT * FROM sensors;");
+		$stmt = $pdo->prepare("SELECT * FROM sensors;");
 
     echo "<table>";
  
-    while($row = mysql_fetch_array($result)){
-      echo "<tr><td>" . $row['record_id'] . "</td><td>" . $row['user'] . "</td></tr>";
+    if($stmt->execute()) {
+    	while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    	  echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>";
+    	}
     }
 
     echo "</table>";
