@@ -16,8 +16,8 @@
 		echo "<table>";
 
 		if($stmt->execute()) {
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				echo "<tr><td>" . $row[0] . "</td><td>" . $row['Timestamp'] . "</td></tr>";
+			while($row = $stmt->fetch()){
+				echo "<tr><td>" . $row[0] . "</td><td>" . $row["Timestamp"] . "</td></tr>";
 			}
 		}
 
