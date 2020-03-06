@@ -13,15 +13,15 @@
 
 		$stmt = $pdo->prepare("SELECT * FROM sensors;");
 
-    echo "<table>";
- 
-    if($stmt->execute()) {
-    	while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    	  echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>";
-    	}
-    }
+		echo "<table>";
 
-    echo "</table>";
+		if($stmt->execute()) {
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+				echo "<tr><td>" . $row["Record_id"] . "</td><td>" . $row["Timestamp"] . "</td></tr>";
+			}
+		}
+
+		echo "</table>";
 
 	} catch (PDOException $e) {
 		echo "Error: ".$e->getMessage();
