@@ -23,7 +23,7 @@
 			fputcsv($f, $fields, $delimiter);
     
 			while($row = $stmt->fetch(PDO::FETCH_NUM)){
-				$lineData = array("a");
+				$lineData = array();
 				for($i = 0; $i < count($row); $i++) {
 					array_push($lineData, $row[$i]);
 				}
