@@ -19,6 +19,7 @@
 		
 		// Convert hex->data->json and then execute with prepared statement
 		$raw_post = file_get_contents('php://input'); // hexToStr($_GET['data']);
+		echo $raw_post . "<br>";
 		$json_data = json_decode($raw_post, TRUE);
 		foreach($json_data['data'] as $line) {
 			$insert->bindParam(':record_id',$line['record_id']);
