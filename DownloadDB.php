@@ -30,6 +30,8 @@
 				fputcsv($f, $lineData, $delimiter);
 			}
       
+			fseek($f, 0);
+			
 			header('Content-Type: text/csv');
 			header('Content-Disposition: attachment; filename="' . $filename . '";');
       
