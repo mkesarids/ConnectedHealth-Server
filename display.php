@@ -1,15 +1,10 @@
 <?php
 	// Connection details
-	$host = "ec2-18-206-84-251.compute-1.amazonaws.com";
-	$db_name = "d33bcpvj60ocm8";
-	$conn_string = "pgsql:host=".$host.";dbname=".$db_name;
-
-	// Connect
-	$user = "tljymawvctthhl";
-	$password = "686e4e04d04863fa587a3843cdf69e943f3cd77ce5a12d17c10221a61f0e320b";
+	$configs = include('config.php');
+        $conn_string = 'pgsql:host='.$configs['host'].';dbname='.$configs['dbname'];
 
 	try {
-		$pdo = new PDO($conn_string, $user, $password);
+		$pdo = new PDO($conn_string, $configs['username'], $configs['password']);
 
 		$stmt = $pdo->prepare("SELECT * FROM sensors;");
 
