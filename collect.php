@@ -16,10 +16,10 @@
 		
 		// Decoding JSON and collecting the data
 		$raw_post = file_get_contents('php://input');
-		echo $raw_post + "</br>";
+		echo $raw_post . "</br>";
 		$json_data = json_decode($raw_post, TRUE);
 		foreach($json_data['data'] as $sensorData) {
-			$insert->bindParam(':timestamp',$sensorData['timestamp']);
+			$insert->bindParam(':timestamp',$sensorData['Timestamp']);
 			$insert->bindParam(':session_id',$sensorData['session_id']);
 			$insert->bindParam(':record_id',$sensorData['record_id']);
 			$insert->bindParam(':name',$sensorData['name']);
