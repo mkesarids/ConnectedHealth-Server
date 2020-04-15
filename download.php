@@ -14,7 +14,7 @@
       
 			$f = fopen('php://memory', 'w');
       
-			$fields = array('record_id', 'timestamp', 'name', 'accel_x', 'accel_y', 'accel_z', 'quat_x', 'quat_y', 'quat_z', 'quat_w', 'workout');
+			$fields = array('timestamp','session_id','record_id','name','workout','accel_x','accel_y','accel_z','orient_x','orient_y','orient_z','orient_w','rotate_x','rotate_y','rotate_z');
 			fputcsv($f, $fields, $delimiter);
     
 			while($row = $stmt->fetch(PDO::FETCH_NUM)){
