@@ -16,6 +16,7 @@
 		
 		// Decoding JSON and collecting the data
 		$raw_post = file_get_contents('php://input');
+		echo $raw_post + "</br>";
 		$json_data = json_decode($raw_post, TRUE);
 		foreach($json_data['data'] as $sensorData) {
 			$insert->bindParam(':timestamp',$sensorData['timestamp']);
