@@ -9,9 +9,9 @@
 		// Create sensors table, 
 		// Computer rotation: orient_x/y/z/w
 		// Human rotation in degrees rotate_x/y/z
-		$myPDO->exec('CREATE TABLE sensors (timestamp bigint, session_id bigint, record_id bigint, name text, workout text, accel_x real, accel_y real, accel_z real, orient_x real, orient_y real, orient_z real, orient_w real, rotate_x real, rotate_y real, rotate_z real)');
+		$myPDO->exec('CREATE TABLE sensors (timestamp bigint, session_id bigint, record_id bigint, name text, workout text, heart_rate tinyint, accel_x real, accel_y real, accel_z real, orient_x real, orient_y real, orient_z real, orient_w real, rotate_x real, rotate_y real, rotate_z real)');
 
-		$insert_string = 'INSERT INTO sensors (timestamp, session_id, record_id, name, workout, accel_x, accel_y, accel_z, orient_x, orient_y, orient_z, orient_w, rotate_x, rotate_y, rotate_z) VALUES (:timestamp, :session_id, :record_id, :name, :workout, :accel_x, :accel_y, :accel_z, :orient_x, :orient_y, :orient_z, :orient_w, :rotate_x, :rotate_y, :rotate_z)';
+		$insert_string = 'INSERT INTO sensors (timestamp, session_id, record_id, name, workout, heart_rate, accel_x, accel_y, accel_z, orient_x, orient_y, orient_z, orient_w, rotate_x, rotate_y, rotate_z) VALUES (:timestamp, :session_id, :record_id, :name, :workout, :heart_rate, :accel_x, :accel_y, :accel_z, :orient_x, :orient_y, :orient_z, :orient_w, :rotate_x, :rotate_y, :rotate_z)';
 		$insert = $myPDO->prepare($insert_string);
 		
 		// Decoding JSON and collecting the data
@@ -23,6 +23,7 @@
 			$insert->bindParam(':record_id',$sensorData['record_id']);
 			$insert->bindParam(':name',$sensorData['name']);
 			$insert->bindParam(':workout',$sensorData['workout']);
+			$insert->bindParam(':heart_rate',$sensorData['HeartRate']);
 			$insert->bindParam(':accel_x',$sensorData['Acceleration']['X']);
 			$insert->bindParam(':accel_y',$sensorData['Acceleration']['Y']);
 			$insert->bindParam(':accel_z',$sensorData['Acceleration']['Z']);
