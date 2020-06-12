@@ -6,10 +6,21 @@
 	try {
 		$pdo = new PDO($conn_string, $configs['username'], $configs['password']);
 
-		$stmt = $pdo->prepare("SELECT * FROM sensors;");
-
+		
+		
 		echo "<table>";
-
+		$stmt_string = "SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';";
+		$stmt = $pdo->prepare($stmt_string);
+		if($stmt->execute()) {
+			echo "<th>";
+			while($row = $stmt->fetch()){
+				echo "<td>".$row[0]."</td>";
+			}
+			echo "</th>";
+		}
+		
+		$stmt_string = "SELECT * FROM sensors;"
+		$stmt = $pdo->prepare($stmt_string);
 		if($stmt->execute()) {
 			while($row = $stmt->fetch()){
 				echo "<tr>";
@@ -19,11 +30,9 @@
 				echo "</tr>";
 			}
 		}
-
 		echo "</table>";
 
 	} catch (PDOException $e) {
 		echo "Error: ".$e->getMessage();
 	}
-
 ?>
