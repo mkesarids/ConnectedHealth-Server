@@ -14,12 +14,12 @@
 		if($stmt->execute()) {
 			echo "<th>";
 			while($row = $stmt->fetch()){
-				echo "<td>".$row[0]."</td>";
+				echo "<td>" . $row[0] . "</td>";
 			}
 			echo "</th>";
 		}
 		
-		$stmt_string = "SELECT * FROM sensors;"
+		$stmt_string = "SELECT * FROM sensors;";
 		$stmt = $pdo->prepare($stmt_string);
 		if($stmt->execute()) {
 			while($row = $stmt->fetch()){
