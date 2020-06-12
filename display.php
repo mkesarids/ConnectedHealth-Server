@@ -12,11 +12,11 @@
 		$stmt_string = "SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';";
 		$stmt = $pdo->prepare($stmt_string);
 		if($stmt->execute()) {
-			echo "<th>";
+			echo "<tr>";
 			while($row = $stmt->fetch()){
-				echo "<td>" . $row[0] . "</td>";
+				echo "<th>" . $row[0] . "</th>";
 			}
-			echo "</th>";
+			echo "</tr>";
 		}
 		
 		$stmt_string = "SELECT * FROM sensors;";
