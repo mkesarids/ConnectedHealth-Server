@@ -8,10 +8,10 @@
 		$stmt_string = $_GET['sql'];
 		$stmt = $myPDO->prepare($stmt_string);
     
-    echo "<table>";
+		echo "<table>";
 
 		if($stmt->execute()) {
-      while($row = $stmt->fetch()){
+			while($row = $stmt->fetch()){
 				echo "<tr>";
 				for($i = 0; $i < count($row); $i++) {
 					echo "<td>" . $row[$i] . "</td>";
