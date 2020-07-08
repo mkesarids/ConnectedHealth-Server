@@ -1,5 +1,5 @@
 <?php if($_SERVER["REQUEST_METHOD"] == "GET" | $_POST["action"] === "Display"): ?>
-	<h2>ConnectedHealth Form</h2>
+	<h2>Connected Health Data Form</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF "]);?>">
 		<table>
 			<tr><td>Session id: </td><td><input type="text" name="session_id"></td></tr>
@@ -9,6 +9,7 @@
 			<td><input type="submit" name="action" value="Download"></td></tr>
 		</table>
         </form>
+	<hr/>
 <?php endif; ?>
 <?php 
 	// Removing the redundant HTML characters if any exist.
