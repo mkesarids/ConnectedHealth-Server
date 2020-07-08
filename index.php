@@ -59,9 +59,7 @@
 
 			$stmt_string = "SELECT * FROM sensors WHERE name LIKE '%:name%' AND workout LIKE '%:workout%';";
 			$stmt = $pdo->prepare($stmt_string);
-			$stmt->bindParam(':name', $name);
-			$stmt->bindParam(':workout', $workout);
-			if($stmt->execute([$name, $workout])) {
+			if($stmt->execute([':name' => $name, ':workout' => $workout])) {
 				while($row = $stmt->fetch()){
 					echo "<tr>";
 					for($i = 0; $i < count($row); $i++) {
