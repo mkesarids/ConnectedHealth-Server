@@ -58,9 +58,8 @@
 			}
 		
 			echo $name;
-			$stmt_string = "SELECT * FROM sensors WHERE session_id LIKE '%:session_id%' AND name LIKE '%:name%' AND workout LIKE '%:workout%';";
+			$stmt_string = "SELECT * FROM sensors WHERE name LIKE '%:name%' AND workout LIKE '%:workout%';";
 			$stmt = $pdo->prepare($stmt_string);
-			$stmt->bindParam(':session_id', $session_id);
 			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':workout', $workout);
 			if($stmt->execute()) {
