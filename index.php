@@ -77,6 +77,7 @@
 				$delimiter = ",";
 				$filename = "SensorData_" . date('Y-m-d') . ".csv";
 				$f = fopen('php://memory', 'w');
+				fseek($f, 0);
 				
 				if($column_stmt->execute()) {
 					$columns = array();
@@ -102,6 +103,7 @@
 					
 					fpassthru($f);
 				}
+				fclose($f);
 			}
 		} catch (PDOException $e) {
 			echo "Error: ".$e->getMessage();
