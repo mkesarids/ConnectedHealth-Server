@@ -10,7 +10,6 @@
 		</table>
         </form>
 <?php endif; ?>
-
 <?php 
 	// Removing the redundant HTML characters if any exist.
 	function test_input($data) {
