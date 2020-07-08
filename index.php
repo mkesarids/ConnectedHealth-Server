@@ -3,7 +3,7 @@
 		echo '<html>';
 		echo '<body>';
 		echo '<h2>ConnectedHealth Data</h2>';
-		echo '<form method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF "]);?>">';
+		echo '<form method="post" action=\"<?php echo htmlspecialchars($_SERVER[\" PHP_SELF \"]);?>\">';
 		echo '<table>';
 		echo '<tr><td>Session id: </td><td><input type="text" name="session_id"></td></tr>';
 		echo '<tr><td>Name: </td><td><input type="text" name="name"></td></tr>';
