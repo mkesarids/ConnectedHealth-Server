@@ -62,12 +62,14 @@
 					echo "</tr>";
 				}
 				
-				while($row = $values_stmt->fetch()){
-					echo "<tr>";
-					for($i = 0; $i < count($row); $i++) {
-						echo "<td>" . $row[$i] . "</td>";
+				if($values_stmt->execute()) {
+					while($row = $values_stmt->fetch()){
+						echo "<tr>";
+						for($i = 0; $i < count($row); $i++) {
+							echo "<td>" . $row[$i] . "</td>";
+						}
+						echo "</tr>";
 					}
-					echo "</tr>";
 				}
 				
 				echo "</table>";
