@@ -8,7 +8,9 @@
 <body>
     <?php
         // Defining variables
-	$session_id = $name = $workout = "";
+	$session_id = "";
+	$name = "";
+	$workout = "";
 
         // Checking for a POST request
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
