@@ -57,10 +57,10 @@
 				echo "</tr>";
 			}
 
-			$stmt_string = "SELECT * FROM sensors WHERE name LIKE '%?%' AND workout LIKE '%?%';";
+			$stmt_string = "SELECT * FROM sensors WHERE name LIKE :name AND workout LIKE :workout;";
 			$stmt = $pdo->prepare($stmt_string);
-			$stmt->bindParam(1, $name, PDO::PARAM_STR, 12);
-			$stmt->bindParam(2, $workout, PDO::PARAM_STR, 12);
+			$stmt->bindParam(":name", "%".$name."%");
+			$stmt->bindParam(":workout", "%".$workout."%");
 			if($stmt->execute()) {
 				while($row = $stmt->fetch()){
 					echo "<tr>";
