@@ -1,21 +1,18 @@
-<?php
-	function displayForm() {
-		echo '<html>';
-		echo '<body>';
-		echo '<h2>ConnectedHealth Data</h2>';
-		echo '<form method="post" action=\"<?php echo htmlspecialchars($_SERVER[\" PHP_SELF \"]);?>\">';
-		echo '<table>';
-		echo '<tr><td>Session id: </td><td><input type="text" name="session_id"></td></tr>';
-		echo '<tr><td>Name: </td><td><input type="text" name="name"></td></tr>';
-		echo '<tr><td>Workout: </td><td><input type="text" name="workout"></td></tr>';
-		echo '<tr><td><input type="submit" name="action" value="Display"></td>';
-		echo '<td><input type="submit" name="action" value="Download"></td></tr>';
-		echo '</table>';
-		echo '</form>';
-	}
+<?php if($_SERVER["REQUEST_METHOD"] == "GET" | $_POST["action"] === "Display"): ?>
+	<h2>ConnectedHealth Data Download</h2>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF "]);?>">
+		<table>
+			<tr><td>Session id: </td><td><input type="text" name="session_id"></td></tr>
+			<tr><td>Name: </td><td><input type="text" name="name"></td></tr>
+			<tr><td>Workout: </td><td><input type="text" name="workout"></td></tr>
+			<tr><td><input type="submit" name="action" value="Display"></td>
+			<td><input type="submit" name="action" value="Download"></td></tr>
+		</table>
+        </form>
+<?php endif; ?>
 
-	if($_SERVER["REQUEST_METHOD"] == "GET") {
-	} else if($_SERVER["REQUEST_METHOD"] == "POST") {
+<?php 
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Defining variables
 		$session_id = $name = $workout = $action = "";
 
