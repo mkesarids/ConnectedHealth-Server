@@ -61,10 +61,9 @@
 			$stmt = $pdo->prepare($stmt_string);
 			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':workout', $workout);
-			if($stmt->execute()) {
+			if($stmt->execute([$name, $workout])) {
 				while($row = $stmt->fetch()){
 					echo "<tr>";
-					echo $name . $workout;
 					for($i = 0; $i < count($row); $i++) {
 						echo "<td>" . $row[$i] . "</td>";
 					}
