@@ -15,7 +15,6 @@
 	}
 
 	if($_SERVER["REQUEST_METHOD"] == "GET") {
-		displayForm();
 	} else if($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Defining variables
 		$session_id = $name = $workout = $action = "";
