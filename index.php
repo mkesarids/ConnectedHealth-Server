@@ -59,7 +59,7 @@
 					echo "<table>";
 					if($col_stmt->execute()) {
 						echo "<tr>";
-						while($row = $stmt->fetch()){
+						while($row = $col_stmt->fetch()){
 							echo "<th>" . $row[0] . "</th>";
 						}
 						echo "</tr>";
@@ -81,7 +81,7 @@
 					
 					if($col_stmt->execute()) {
 						$columns = array();
-						while($row = $stmt->fetch()){
+						while($row = $col_stmt->fetch()){
 							array_push($columns, $row[0]);
 						}
 						fputcsv($f, $columns, $delimiter);
