@@ -39,7 +39,7 @@
 
 			$column_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
 		
-			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE " . (!empty($session_id) ? "session_id = :session_id OR " : "") . "name LIKE :name AND workout LIKE :workout;");
+			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE " . (!empty($session_id) ? "session_id = :session_id AND " : "") . "name LIKE :name AND workout LIKE :workout;");
 			$values_stmt->bindValue(":session_id", (int)$session_id);
 			$values_stmt->bindValue(":name", "%{$name}%");
 			$values_stmt->bindValue(":workout", "%{$workout}%");
