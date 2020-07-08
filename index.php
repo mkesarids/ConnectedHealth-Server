@@ -76,8 +76,7 @@
 			} else if($action === "Download") {
 				$delimiter = ",";
 				$filename = "SensorData_" . date('Y-m-d') . ".csv";
-				$f = fopen('php://memory', 'w');
-				fseek($f, 0);
+				$f = fopen($_SERVER['DOCUMENT_ROOT'] . '/tmp.csv', 'w');
 				
 				if($column_stmt->execute()) {
 					$columns = array();
