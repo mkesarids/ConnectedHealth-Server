@@ -1,5 +1,5 @@
 <?php if($_SERVER["REQUEST_METHOD"] == "GET" | $_POST["action"] === "Display"): ?>
-	<h2>ConnectedHealth Data Download</h2>
+	<h2>ConnectedHealth Form</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF "]);?>">
 		<table>
 			<tr><td>Session id: </td><td><input type="text" name="session_id"></td></tr>
@@ -39,7 +39,8 @@
 
 			$column_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
 		
-			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE name LIKE :name AND workout LIKE :workout;");
+			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE session_id = :session_id AND name LIKE :name AND workout LIKE :workout;");
+			$values_stmt->bindParam(":session_id", $session_id);
 			$values_stmt->bindValue(":name", "%{$name}%");
 			$values_stmt->bindValue(":workout", "%{$workout}%");
 			
