@@ -52,6 +52,26 @@
 			$values_stmt->bindValue(":name", "%{$name}%");
 			$values_stmt->bindValue(":workout", "%{$workout}%");
 			
+			if($action === "Display") {
+				echo "<table>";
+				if($column_stmt->execute()) {
+					echo "<tr>";
+					while($row = $column_stmt->fetch()){
+						echo "<th>" . $row[0] . "</th>";
+					}
+					echo "</tr>";
+				}
+				
+				while($row = $values_stmt->fetch()){
+					echo "<tr>";
+					for($i = 0; $i < count($row); $i++) {
+						echo "<td>" . $row[$i] . "</td>";
+					}
+					echo "</tr>";
+				}
+				
+				echo "</table>";
+			}
 		} catch (PDOException $e) {
 			echo "Error: ".$e->getMessage();
 		}
