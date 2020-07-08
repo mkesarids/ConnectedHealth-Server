@@ -46,64 +46,12 @@
 		try {
 			$pdo = new PDO($conn_string, $configs['username'], $configs['password']);
 
+			$column_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
 			
-			$col_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
-
-			$stmt_string = "SELECT * FROM sensors WHERE name LIKE :name AND workout LIKE :workout;";
-			$stmt = $pdo->prepare($stmt_string);
-			$stmt->bindValue(":name", "%{$name}%");
-			$stmt->bindValue(":workout", "%{$workout}%");
-			if($stmt->execute()) {
-				if($action === "Display") {
-					
-					echo "<table>";
-					if($col_stmt->execute()) {
-						echo "<tr>";
-						while($row = $col_stmt->fetch()){
-							echo "<th>" . $row[0] . "</th>";
-						}
-						echo "</tr>";
-					}
-					
-					while($row = $stmt->fetch()){
-						echo "<tr>";
-						for($i = 0; $i < count($row); $i++) {
-							echo "<td>" . $row[$i] . "</td>";
-						}
-						echo "</tr>";
-					}
-					
-					echo "</table>";
-				} else if($action === "Download) {
-					$delimiter = ",";
-					$filename = "SensorData_" . date('Y-m-d') . ".csv";
-					$f = fopen('php://memory', 'w');
-					
-					if($col_stmt->execute()) {
-						$columns = array();
-						while($row = $col_stmt->fetch()){
-							array_push($columns, $row[0]);
-						}
-						fputcsv($f, $columns, $delimiter);
-					}
-		
-					while($row = $stmt->fetch(PDO::FETCH_NUM)){
-						$lineData = array();
-						for($i = 0; $i < count($row); $i++) {
-							array_push($lineData, $row[$i]);
-						}
-						fputcsv($f, $lineData, $delimiter);
-					}
-					
-      					fseek($f, 0);
-		
-					header('Content-Type: text/csv');
-					header('Content-Disposition: attachment; filename="' . $filename . '";');
-      
-					fpassthru($f);
-					}
-				}
-			}
+			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE name LIKE :name AND workout LIKE :workout;");
+			$values_stmt->bindValue(":name", "%{$name}%");
+			$values_stmt->bindValue(":workout", "%{$workout}%");
+			
 		} catch (PDOException $e) {
 			echo "Error: ".$e->getMessage();
 		}
