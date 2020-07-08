@@ -73,6 +73,35 @@
 				}
 				
 				echo "</table>";
+			} else if($action === "Download") {
+				$delimiter = ",";
+				$filename = "SensorData_" . date('Y-m-d') . ".csv";
+				$f = fopen('php://memory', 'w');
+				
+				if($column_stmt->execute()) {
+					$columns = array();
+					while($row = $column_stmt->fetch()){
+						array_push($columns, $row[0]);
+					}
+					fputcsv($f, $columns, $delimiter);
+				}
+				
+				if($values_stmt->execute()) {
+					while($row = $values_stmt->fetch(PDO::FETCH_NUM)){
+						$lineData = array();
+						for($i = 0; $i < count($row); $i++) {
+							array_push($lineData, $row[$i]);
+						}
+						fputcsv($f, $lineData, $delimiter);
+					}
+					
+					fseek($f, 0);
+					
+					header('Content-Type: text/csv');
+					header('Content-Disposition: attachment; filename="' . $filename . '";');
+					
+					fpassthru($f);
+				}
 			}
 		} catch (PDOException $e) {
 			echo "Error: ".$e->getMessage();
