@@ -14,7 +14,7 @@
 		echo '</form>';
 	}
 
-	if(!isset($_POST["action"])) {
+	if(true) {
 	} else {
 		// Defining variables
 		$session_id = $name = $workout = $action = "";
