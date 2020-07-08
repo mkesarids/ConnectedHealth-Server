@@ -14,18 +14,17 @@
 		echo '</form>';
 	}
 
-	if(isset($_POST["action"])) {
-	} else {
+	if($_SERVER["REQUEST_METHOD"] == "GET") {
+		displayForm();
+	} else if($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Defining variables
 		$session_id = $name = $workout = $action = "";
 
-        		// Checking for a POST request
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			$session_id = test_input($_POST["session_id"]);
-			$name = test_input($_POST["name"]);
-			$workout = test_input($_POST["workout"]);
-			$action = test_input($_POST["action"]);
-		}
+        	// Get post data
+		$session_id = test_input($_POST["session_id"]);
+		$name = test_input($_POST["name"]);
+		$workout = test_input($_POST["workout"]);
+		$action = test_input($_POST["action"]);
 
 		// Removing the redundant HTML characters if any exist.
 		function test_input($data) {
