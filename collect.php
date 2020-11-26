@@ -11,7 +11,7 @@
 		// Human rotation in degrees rotate_x/y/z
 		$myPDO->exec('CREATE TABLE sensors (timestamp bigint, session_id bigint, record_id bigint, name text, age bigint, gender text, height bigint, workout text, heart_rate smallint, accel_x real, accel_y real, accel_z real, euler_orient_x real, euler_orient_y real, euler_orient_z real, quat_orient_x real, quat_orient_y real, quat_orient_z real, quat_orient_w real, rotation_x real, rotation_y real, rotation_z real)');
 
-		$insert_string = 'INSERT INTO sensors (timestamp, session_id, record_id, name, age, gender height, workout, heart_rate, accel_x, accel_y, accel_z, euler_orient_x, euler_orient_y, euler_orient_z, quat_orient_x, quat_orient_y, quat_orient_z, quat_orient_w, rotation_x, rotation_y, rotation_z) VALUES (:timestamp, :session_id, :record_id, :name, :age, :gender, :height, :workout, :heart_rate, :accel_x, :accel_y, :accel_z, :euler_orient_x, :euler_orient_y, :euler_orient_z, :quat_orient_x, :quat_orient_y, :quat_orient_z, :quat_orient_w, :rotation_x, :rotation_y, :rotation_z)';
+		$insert_string = 'INSERT INTO sensors (timestamp, session_id, record_id, name, age, gender, height, workout, heart_rate, accel_x, accel_y, accel_z, euler_orient_x, euler_orient_y, euler_orient_z, quat_orient_x, quat_orient_y, quat_orient_z, quat_orient_w, rotation_x, rotation_y, rotation_z) VALUES (:timestamp, :session_id, :record_id, :name, :age, :gender, :height, :workout, :heart_rate, :accel_x, :accel_y, :accel_z, :euler_orient_x, :euler_orient_y, :euler_orient_z, :quat_orient_x, :quat_orient_y, :quat_orient_z, :quat_orient_w, :rotation_x, :rotation_y, :rotation_z)';
 		$insert = $myPDO->prepare($insert_string);
 
 		// Decoding JSON and collecting the data
