@@ -34,17 +34,17 @@
 		// Connection details
 		$configs = include('config.php');
 		$conn_string = 'pgsql:host='.$configs['host'].';dbname='.$configs['dbname'];
-		
+
 		try {
 			$pdo = new PDO($conn_string, $configs['username'], $configs['password']);
 
 			$column_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
-		
+
 			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE " . (!empty($session_id) ? "session_id = :session_id AND " : "") . "name LIKE :name AND workout LIKE :workout;");
 			$values_stmt->bindValue(":session_id", (int)$session_id);
 			$values_stmt->bindValue(":name", "%{$name}%");
 			$values_stmt->bindValue(":workout", "%{$workout}%");
-			
+
 			if($action === "Display") {
 				echo "<table>";
 				if($column_stmt->execute()) {
@@ -54,7 +54,7 @@
 					}
 					echo "</tr>";
 				}
-				
+
 				if($values_stmt->execute()) {
 					while($row = $values_stmt->fetch()){
 						echo "<tr>";
@@ -64,7 +64,7 @@
 						echo "</tr>";
 					}
 				}
-				
+
 				echo "</table>";
 			} else if($action === "Download") {
 				$delimiter = ",";
@@ -78,7 +78,7 @@
 					}
 					fputcsv($f, $columns, $delimiter);
 				}
-				
+
 				if($values_stmt->execute()) {
 					while($row = $values_stmt->fetch(PDO::FETCH_NUM)){
 						$lineData = array();
@@ -87,12 +87,12 @@
 						}
 						fputcsv($f, $lineData, $delimiter);
 					}
-				
+
 					fseek($f, 0);
-				
+
 					header('Content-Type: text/csv');
 					header('Content-Disposition: attachment; filename="' . $filename . '";');
-				
+
 					fpassthru($f);
 				}
 			}
