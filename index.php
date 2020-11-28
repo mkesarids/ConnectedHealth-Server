@@ -59,7 +59,7 @@
 					while($row = $values_stmt->fetch()){
 						echo "<tr>";
 						for($i = 0; $i < count($row); $i++) {
-							echo "<td>" . $row[$i] . "</td>";
+							echo "<td>" . strip_tags($row[$i]) . "</td>";
 						}
 						echo "</tr>";
 					}
