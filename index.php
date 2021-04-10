@@ -95,9 +95,6 @@
 				$columns = array();
 
 				if($column_stmt->execute()) {
-					array_push($columns, "date");
-					array_push($columns, "time");
-					
 					while($row = $column_stmt->fetch()){
 						array_push($columns, $row[0]);
 					}
