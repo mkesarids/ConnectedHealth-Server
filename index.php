@@ -51,8 +51,11 @@
 				echo "<table>";
 				if($column_stmt->execute()) {
 					echo "<tr>";
+					
+					// Patch on date and time columns
 					echo "<th>date</th>";
 					echo "<th>time</th>";
+					
 					while($row = $column_stmt->fetch()){
 						echo "<th>" . $row[0] . "</th>";
 						array_push($columns, $row[0]);
@@ -95,12 +98,19 @@
 				$columns = array();
 
 				if($column_stmt->execute()) {
+					$temp_columns = array();
+					
+					// Patch on date and time columns
+					array_push($temp_columns, "date");
+					array_push($temp_columns, "time");
+					
 					while($row = $column_stmt->fetch()){
+						array_push($temp_columns, $row[0]);
 						array_push($columns, $row[0]);
 					}
 					
-					array_push($columns, "elapsed"); // Patch on the elapsed time column
-					fputcsv($f, $columns, $delimiter);
+					array_push($temp_columns, "elapsed"); // Patch on the elapsed time column
+					fputcsv($f, $temp_columns, $delimiter);
 				}
 
 				if($values_stmt->execute()) {
