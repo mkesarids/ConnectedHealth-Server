@@ -51,6 +51,8 @@
 				echo "<table>";
 				if($column_stmt->execute()) {
 					echo "<tr>";
+					echo "<th>date</th>";
+					echo "<th>time</th>";
 					while($row = $column_stmt->fetch()){
 						echo "<th>" . $row[0] . "</th>";
 						array_push($columns, $row[0]);
@@ -65,6 +67,11 @@
 					
 					while($row = $values_stmt->fetch(PDO::FETCH_ASSOC)){
 						echo "<tr>";
+						
+						// Add date and time
+						echo "<td>" . gmdate("m-d-Y", $row['timestamp']/1000) . "</td>";
+						echo "<td>" . gmdate("H:i:s", $row['timestamp']/1000) . "</td>";
+						
 						foreach($columns as $col) {
 							echo "<td>" . strip_tags($row[$col]) . "</td>";
 						}
@@ -88,6 +95,9 @@
 				$columns = array();
 
 				if($column_stmt->execute()) {
+					array_push($columns, "date");
+					array_push($columns, "time");
+					
 					while($row = $column_stmt->fetch()){
 						array_push($columns, $row[0]);
 					}
@@ -102,6 +112,11 @@
 					
 					while($row = $values_stmt->fetch(PDO::FETCH_ASSOC)){
 						$lineData = array();
+						
+						// Add date and time
+						array_push($lineData, gmdate("m-d-Y", $row['timestamp']/1000));
+						array_push($lineData, gmdate("H:i:s", $row['timestamp']/1000));
+						
 						foreach($columns as $col) {
 							array_push($lineData, $row[$col]);
 						}
