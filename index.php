@@ -40,27 +40,42 @@
 
 			$column_stmt = $pdo->prepare("SELECT column_name FROM information_schema.columns WHERE table_name = 'sensors';");
 
-			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE " . (!empty($session_id) ? "session_id = :session_id AND " : "") . "name LIKE :name AND workout LIKE :workout;");
+			$values_stmt = $pdo->prepare("SELECT * FROM sensors WHERE " . (!empty($session_id) ? "session_id = :session_id AND " : "") . "name LIKE :name AND workout LIKE :workout ORDER BY name, session_id, timestamp;");
 			$values_stmt->bindValue(":session_id", (int)$session_id);
 			$values_stmt->bindValue(":name", "%{$name}%");
 			$values_stmt->bindValue(":workout", "%{$workout}%");
 
 			if($action === "Display") {
+				$columns = array();
+				
 				echo "<table>";
 				if($column_stmt->execute()) {
 					echo "<tr>";
 					while($row = $column_stmt->fetch()){
 						echo "<th>" . $row[0] . "</th>";
+						array_push($columns, $row[0]);
 					}
+					echo "<th>elapsed</th>";
 					echo "</tr>";
 				}
 
 				if($values_stmt->execute()) {
-					while($row = $values_stmt->fetch()){
+					$start = 0;
+					$session_id = 0;
+					
+					while($row = $values_stmt->fetch(PDO::FETCH_ASSOC)){
 						echo "<tr>";
-						for($i = 0; $i < count($row); $i++) {
-							echo "<td>" . strip_tags($row[$i]) . "</td>";
+						foreach($columns as $col) {
+							echo "<td>" . strip_tags($row[$col]) . "</td>";
 						}
+						
+						// Isolate session
+						if($row['session_id'] != $session_id) {
+							$start = $row['timestamp'];
+							$session_id = $row['session_id'];
+						}
+						
+						echo "<td>" . ($row['timestamp'] - $start) . "</td>"; // Add elapsed time
 						echo "</tr>";
 					}
 				}
@@ -70,21 +85,34 @@
 				$delimiter = ",";
 				$filename = "SensorData_" . date('Y-m-d') . ".csv";
 				$f = fopen('php://memory', 'w');
+				$columns = array();
 
 				if($column_stmt->execute()) {
-					$columns = array();
 					while($row = $column_stmt->fetch()){
 						array_push($columns, $row[0]);
 					}
+					
+					array_push($columns, "elapsed"); // Patch on the elapsed time column
 					fputcsv($f, $columns, $delimiter);
 				}
 
 				if($values_stmt->execute()) {
-					while($row = $values_stmt->fetch(PDO::FETCH_NUM)){
+					$start = 0;
+					$session_id = 0;
+					
+					while($row = $values_stmt->fetch(PDO::FETCH_ASSOC)){
 						$lineData = array();
-						for($i = 0; $i < count($row); $i++) {
-							array_push($lineData, $row[$i]);
+						foreach($columns as $col) {
+							array_push($lineData, $row[$col]);
 						}
+						
+						// Isolate session
+						if($row['session_id'] != $session_id) {
+							$start = $row['timestamp'];
+							$session_id = $row['session_id'];
+						}
+						
+						array_push($lineData, $row['timestamp'] - $start); // Add elapsed time
 						fputcsv($f, $lineData, $delimiter);
 					}
 
