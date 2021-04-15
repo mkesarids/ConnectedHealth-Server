@@ -52,7 +52,7 @@
 		$count = $values_stmt->rowCount();
 		$remainder = $count % 500;
 		
-		if(remainder < 30) {
+		if($remainder < 15 && $count > 5000) {
 			file_get_contents("https://maker.ifttt.com/trigger/storage_warning/with/key/laXZALmNMF9xjRKG0_OTM0r-NF05QZk5hZ8UI6w2-W5?value1=$count");
 		}
 		
