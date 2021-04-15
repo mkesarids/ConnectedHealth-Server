@@ -46,6 +46,13 @@
 
 		echo "New records created successfully!";
 
+		// Check capacity and notify me
+		$values_stmt = $myPDO->prepare("SELECT * FROM sensors;");
+		$values_stmt->execute();
+		$count = $values_stmt->rowCount();
+		
+		echo "Rows: $count";
+		
 	} catch (PDOException $e) {
 		echo "Error: ".$e->getMessage();
 	}
