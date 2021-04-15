@@ -50,8 +50,9 @@
 		$values_stmt = $myPDO->prepare("SELECT * FROM sensors;");
 		$values_stmt->execute();
 		$count = $values_stmt->rowCount();
+		$remainder = $count % 500;
 		
-		echo "Rows: $count";
+		echo "\nRemainder: $remainder";
 		
 	} catch (PDOException $e) {
 		echo "Error: ".$e->getMessage();
