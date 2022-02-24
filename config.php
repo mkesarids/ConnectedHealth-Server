@@ -1,8 +1,8 @@
 <?php
 	return array(
-		'host' => 'ec2-35-168-77-215.compute-1.amazonaws.com',
-		'username' => 'obetgrwgqzcuxt',
-		'password' => 'c3fed1b95867565f00c68396658a6f78fbcb040253bcc0a979f8c8e3501ab537',
-		'dbname' => 'd8f7944mbof2o3'
+		'host' => 'ec2-44-198-126-181.compute-1.amazonaws.com',
+		'username' => 'rrdpmfjvhrzbfp',
+		'password' => 'd6d70099b8df787ec0e834aecd8216747579cd7dfe5b9ac6528cd5e40c8507d0',
+		'dbname' => 'd58ur88ks69aii'
 	)
 ?>
