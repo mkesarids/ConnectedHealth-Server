@@ -2,7 +2,7 @@
 	<h2>Connected Health Data Form</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF "]);?>">
 		<table>
-			<tr><td>Session Id: </td><td><input type="text" name="session_id"></td></tr>
+			<tr><td>Session ID: </td><td><input type="text" name="session_id"></td></tr>
 			<tr><td>Name: </td><td><input type="text" name="name"></td></tr>
 			<tr><td>Workout: </td><td><input type="text" name="workout"></td></tr>
 			<tr><td><input type="submit" name="action" value="Display"></td>
